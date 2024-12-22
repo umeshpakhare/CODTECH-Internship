@@ -1,0 +1,175 @@
+TASK FIVE: EMPLOYEE MANAGEMENT SYSTEM
+
+
+TASK FIVE:
+Develop a database for managing employee records, including personal details,
+job positions, departments, and salaries. This project involves creating complex
+relationships and queries. Design tables for employees, departments, and job
+positions. Write SQL queries to manage employee records and departmental
+information.
+
+
+/*creating a emp database*/
+CREATE DATABASE EMP;
+
+/*creating a emp table*/
+CREATE TABLE EMPLOYEE(
+EMP_ID INT PRIMARY KEY,
+NAME VARCHAR(40) NOT NULL,
+EMAIL VARCHAR(40) NOT NULL,
+DEPT VARCHAR(20),
+JOB_POSITION VARCHAR(20) NOT NULL,
+SALARY DECIMAL(10,2) DEFAULT 30000.00,
+HIRED_DATE DATE NOT NULL DEFAULT CURRENT_DATE
+);
+
+INSERT INTO EMPLOYEE (EMP_ID,NAME,EMAIL,DEPT,JOB_POSITION,SALARY,HIRED_DATE)
+VALUES
+(1,'Umesh Pakhare','umeshp854@gmail.com','IT','Software Developer',50000.00,'2024-12-12'),
+(2,'Priya Singh','priyasingh@gmail.com','HR','EmpHiring',45000.00,'2020-01-22'),
+(3,'Arjun Verma','arjunv421@gmail.com','Cleark','Data Entry',55000.00,'2022-05-02'),
+(4,'Anjali Mehta','anjli@gmail.com','Marketing','Product Associater',60000.00,'2018-05-01'),
+(5,'Vijay Nair','vijaynair@gmail.com','IT','Web Developer',48000.00,'2023-11-10'),
+(6,'Rahul Kumar','rahul@gmail.com','Banking','Salary Distributer',58000.00,'2024-07-28');
+
+
+SELECT * FROM EMPLOYEE;
+
+SELECT NAME FROM EMPLOYEE;
+
+SELECT NAME, DEPT FROM EMPLOYEE;
+
+/*update and modify*/
+UPDATE EMPLOYEE
+SET DEPT='Finance'
+WHERE EMP_ID=6;
+
+SELECT * FROM EMPLOYEE;
+
+/*Deleting Data*/
+DELETE FROM EMPLOYEE 
+WHERE EMP_ID='6';
+
+SELECT * FROM EMPLOYEE;
+
+/* WAQTD find employee whose salary is more than 55000.00*/
+SELECT * FROM EMPLOYEE 
+WHERE SALARY >55000.00;
+
+/* WAQTD find employee whose details  of employees if the emp working as a IT (USING AND OPERATOR)*/
+SELECT * FROM EMPLOYEE
+WHERE DEPT='IT' AND EMP_ID='1';
+
+
+/* WAQTD find employee whose details  of employees if the emp working as a IT (USING OR OPERATOR)*/
+SELECT * FROM EMPLOYEE
+WHERE DEPT='IT' OR EMP_ID='1';
+
+
+/* WAQTD find employee whose salary is more than 50000.00 and less than 65000.00 (USING BETWEEN OPERATOR)*/
+SELECT * FROM EMPLOYEE
+WHERE
+SALARY BETWEEN 50000.00 AND 65000.00;
+
+
+/*DISTINCT*/
+SELECT DISTINCT NAME FROM EMPLOYEE;
+
+
+/*ORDER BY*/
+SELECT * FROM EMPLOYEE 
+ORDER BY NAME;
+
+
+/*LIMIT*/
+SELECT * FROM EMPLOYEE LIMIT 3;
+
+/*LIKE*/
+SELECT * FROM EMPLOYEE
+WHERE NAME LIKE'U%';
+
+/*FUNCTIONS 
+COUNT*/
+SELECT COUNT(*) FROM EMPLOYEE;
+
+/*MAX_MIN*/
+SELECT MAX(SALARY) FROM EMPLOYEE;
+SELECT MIN(SALARY) FROM EMPLOYEE;
+
+/*SUM_AVG*/
+SELECT SUM(SALARY) FROM EMPLOYEE;
+SELECT AVG(SALARY) FROM EMPLOYEE;
+
+
+/*Group By*/
+SELECT DEPT FROM EMPLOYEE GROUP BY DEPT;
+
+/*Rmove/Alter Column*/
+ALTER TABLE  EMPLOYEE
+DROP JOB_POSITION  ;
+
+SELECT * FROM EMPLOYEE;
+
+
+
+
+
+TASK SIX: 
+HOTEL BOOKING SYSTEM
+Create a database for managing hotel bookings, including
+rooms, customers, reservations, and payments. This project
+involves handling complex queries and managing booking data.
+Design tables for rooms, customers, reservations, and
+payments.
+
+
+CREATE TABLE ROOM(
+ROOM_NO INT PRIMARY KEY,
+ROOM_TYPE VARCHAR(20) NOT NULL,
+PRICE DECIMAL (10,2) NOT NULL,
+ROOM_STATUS VARCHAR(20) NOT NULL,
+PAYMENT_STATUS VARCHAR(20)
+);
+
+INSERT INTO ROOM (ROOM_NO,ROOM_TYPE,PRICE,ROOM_STATUS,PAYMENT_STATUS)VALUES
+(101,'AC',1400.00,'Booked','Success'),
+(102,'NON-AC',1000.00,'Available','NA'),
+(103,'AC',1800.00,'Available','NA'),
+(104,'AC',2000.00,'Booked','Success'),
+(105,'NON-AC',1200.00,'Booked','Success'),
+(106,'AC',1600.00,'Available','NA');
+
+SELECT * FROM ROOM;
+
+CREATE TABLE CUST(
+CUST_ID INT PRIMARY KEY,
+CUST_NAME VARCHAR(30) NOT NULL,
+CUAT_CITY VARCHAR(30) NOT NULL,
+ADHAR_ID NUMERIC UNIQUE
+);
+
+INSERT INTO CUST(CUST_ID,CUST_NAME,CUAT_CITY,ADHAR_ID)VALUES
+(1,'Umesh Pakhare','Pune',913666763102),
+(2,'Yash Singh','Pimpri',363666863172),
+(3,'Raj Thakur','Delhi',613655763403),
+(4,'Ram Shantu','Pune',137666763627),
+(5,'Ganesh Kolker','Mumbai',913663463102),
+(6,'Sham Todekar','Nagar',319666763321);
+
+SELECT * FROM CUST;
+
+SELECT * FROM ROOM CROSS JOIN CUST;
+
+SELECT * FROM ROOM
+INNER JOIN CUST
+ON CUST.CUST_ID=ROOM.ROOM_NO;
+
+SELECT * FROM ROOM R
+INNER JOIN CUST C
+ON C.CUST_ID=R.ROOM_NO;
+
+ALTER TABLE CUST
+RENAME COLUMN CUAT_CITY TO CUST_CITY;
+
+
+
